@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace, Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    background-color: ivory;
+}
+
+.feature-card {
+    background: #f4f4f4;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card #about-information:hover  {
+    border: 3px solid aquamarine;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 320px auto;
+
+    section {
+        margin: 0 1.5rem;
+
+        div table thead tr td {
+            margin: 0 1rem;
+            padding: 0 1rem;
+        }
+
+        div table tbody tr td {
+            margin: 0 1rem;
+            padding: 0 1rem;
+        }
+
+        div table tbody tr td:hover {
+            background-color: yellow;
+            border-radius: 8px;
+        }
+    }
+}
+
+#nav-links {
+    background-color: ivory;
+}
+
+#nav-links ul li {
+    display: inline;
+    margin: 0 1rem 0 0;
+}
+
+#header {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+#features {
+    padding: 1rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#book-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+    max-width: 320px;
+}
+
+#book-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#submit-book:hover {
+    animation: wobble 0.3s;
+    background-color: green;
+}
+
+#comment-section {
+    margin: 0 0 0 1rem;
+}
+
+#add-comment:hover {
+    animation: wobble 0.5s;
+}
+
+#contact-information:hover {
+    animation: upside-down 2s;
+}
+
+@keyframes wobble {
+    0%,
+    100% {
+        transform: translateX(0%);
+    }
+    15% {
+        transform: translateX(-25%) rotate(-5deg);
+    }
+    30% {
+        transform: translateX(20%) rotate(3deg);
+    }
+    45% {
+        transform: translateX(-15%) rotate(-3deg);
+    }
+    60% {
+    transform: translateX(10%) rotate(2deg);
+    }
+    75% {
+    transform: translateX(-5%) rotate(-1deg);
+    }
+}
+
+@keyframes upside-down {
+    0%,
+    100% {
+        transform: translateX(0%);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+}

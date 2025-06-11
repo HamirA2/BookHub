@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <nav id="nav-links">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Checkout</a></li>
+            <li><a href="#">Donate</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+    </nav>
+    <!-- Header Section -->
+    <div id="header">
+        <h1>BookHub</h1>
+        <!-- <h2>BookHub</h2>
+        <h3>BookHub</h3>
+        <h4>BookHub</h4>
+        <h5>BookHub</h5>
+        <h6>BookHub</h6> -->
+        <p>Track, Review, and Share Your Reading Journey</p>
+    </div>
+    <hr>
+    <main>
+        <section id="features" class="section-container">
+            <h2>Why BookHub?</h2>
+            <ul class="feature-card">
+                <li>BookHub is a community driven library managment system that takes in old or used books and gives them a chance to be read again.</li>
+                <li>We have a wide variety of books and genres.</li>
+                <li>Convenient access over the web.</li>
+                <li>Track your library</li>
+                <li>Keep all your books organized</li>
+            </ul>
+        </section>
+        <div class="grid-container feature-card">
+            <section id="add-book">
+                <h2>Add a Book</h2>
+                <form id="book-form" method="post">
+                    <label for="title">Book Title: </label>
+                    <input type="text" id="title" required>
+                    <input type="text" id="author" placeholder="Author" required>
+                    <input type="date" name="publish-date" id="publish-date" required>
+                    <input type="number" name="price" id="price" placeholder="Price">
+                    <label for="genre">Genre: </label>
+                    <select name="genre" id="genre" required>
+                        <option>-- please select a genre --</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="non-fiction">Non-Fiction</option>
+                        <option value="science-fiction">Science Fiction</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="science-fantasy">Science Fantasy</option>
+                        <option value="science">Science</option>
+                    </select>
+                    <input type="submit" value="Add Book" id="submit-book">
+                </form>
+            </section>
+            <section id="book-list">
+                <h2>Your Books</h2>
+                <div class="books-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Title
+                                </th>
+                                <td>
+                                    Author
+                                </td>
+                                <td>
+                                    Publish Date
+                                </td>
+                                <td>
+                                    Genre
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Clean Code
+                                </th>
+                                <td>
+                                    Robert C. Martin
+                                </td>
+                                <td>
+                                    Aug-1-2008
+                                </td>
+                                <td>
+                                    Non-Fiction
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    First
+                                </th>
+                                <td>
+                                    First Author
+                                </td>
+                                <td>
+                                    Jan-2-2000
+                                </td>
+                                <td>
+                                    Fiction
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Second
+                                </th>
+                                <td>
+                                    Second Author
+                                </td>
+                                <td>
+                                    Feb-3-2001
+                                </td>
+                                <td>
+                                    Fantasy
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Third
+                                </th>
+                                <td>
+                                    Third Author
+                                </td>
+                                <td>
+                                    Mar-4-2002
+                                </td>
+                                <td>
+                                    Science Fiction
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        
+        <br>
+        <!-- Comment section with input gathering -->
+        <section id="comment-section">
+            <h2>Add a comment: </h2>
+            <form id="post-comments" method="post">
+                <label for="username">Username: </label>
+                <input type="text" name="username" id="username" required>
+                <br>
+                <label for="email">Email: </label>
+                <input type="email" name="email" id="email" placeholder="example@email.com" reaquired>
+                <br>
+                <textarea name="comments" id="comments" rows="10" cols="100" required></textarea>
+                <br>
+                <input type="submit" value="Add Comment" id="add-comment">
+            </form>
+        </section>
+        <div class="feature-card">
+            <section id="about-information">
+                <h3>About Us: </h3>
+                <p>BookHub started out as just an idea but as our founders wanted to find a way to connect people with books
+                    while also helping people organize their items, BookHub came to be the main place to find old and new
+                    books for all ages. Not only do we take donations, we also help people find their next favorite book,
+                    so come on, what are you waiting for?
+                </p>
+            </section>
+        </div>
+        
+    </main>
+    <!-- Footer section with contact information -->
+    <footer>
+        <hr>
+        <div id="contact-information" class="feature-card">
+            <h5>Contact Me: </h5>
+            <p>Name: Generic Name</p>
+            <p>Email: me@anyemail.com</p>
+            <p>Phone: 000-000-0000</p>
+            <br>
+            <p>Created with love and pride by Hamir Aquino</p>
+            <p>Copyright HA: All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>
