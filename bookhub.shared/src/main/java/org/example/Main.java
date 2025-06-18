@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.entities.Book;
+import org.example.managers.BookManager;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,6 +13,22 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        BookManager bookManager = new BookManager();
+        System.out.println("Beginning of add book");
+        bookManager.addBook("Gantz",
+                "Hiroya Oku",
+                LocalDate.of(2000, 6, 1),
+                "Manga");
+        System.out.println("Book added");
+        bookManager.addBook("Clean Code",
+                "Robert C. Martin",
+                LocalDate.of(2008, 8, 1),
+                "Non Fiction",
+                (byte)4);
+        System.out.println("Book added");
+
+        System.out.println(bookManager.getBookGenreStatistics());
+
         Book book1 = new Book();
         Book book2 = new Book("Adventures of Huckleberry Finn",
                 "Mark Twain",
@@ -54,7 +71,7 @@ public class Main {
         book1.setRating((byte)4);
         book1.displayBook();
 
-        book2.displayBook();
+        //book2.displayBook();
 
 //        System.out.println("Please enter the first number!");
 //        int num = scanner.nextInt();
