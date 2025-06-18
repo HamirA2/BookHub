@@ -34,8 +34,8 @@
                 <li>BookHub is a community driven library managment system that takes in old or used books and gives them a chance to be read again.</li>
                 <li>We have a wide variety of books and genres.</li>
                 <li>Convenient access over the web.</li>
-                <li>Track your library</li>
-                <li>Keep all your books organized</li>
+                <li>Track your library.</li>
+                <li>Keep all your books organized.</li>
             </ul>
         </section>
         <div class="grid-container feature-card">
@@ -62,7 +62,16 @@
             </section>
             <section id="book-list">
                 <h2>Your Books</h2>
-                <div class="books-container">
+                <label for="sort">Sort</label>
+                <select name="sort" id="sort">
+                    <option value="default">Default</option>
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                    <!-- <option value="author">Author</option>
+                    <option value="publish-date">Publish Date</option>
+                    <option value="Genre">Genre</option> -->
+                </select>
+                <div>
                     <table>
                         <thead>
                             <tr>
@@ -78,71 +87,62 @@
                                 <td>
                                     Genre
                                 </td>
+                                <td>
+                                    Rating
+                                </td>
+                                <td>
+                                    Actions
+                                </td>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th>
-                                    Clean Code
-                                </th>
-                                <td>
-                                    Robert C. Martin
-                                </td>
-                                <td>
-                                    Aug-1-2008
-                                </td>
-                                <td>
-                                    Non-Fiction
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    First
-                                </th>
-                                <td>
-                                    First Author
-                                </td>
-                                <td>
-                                    Jan-2-2000
-                                </td>
-                                <td>
-                                    Fiction
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Second
-                                </th>
-                                <td>
-                                    Second Author
-                                </td>
-                                <td>
-                                    Feb-3-2001
-                                </td>
-                                <td>
-                                    Fantasy
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Third
-                                </th>
-                                <td>
-                                    Third Author
-                                </td>
-                                <td>
-                                    Mar-4-2002
-                                </td>
-                                <td>
-                                    Science Fiction
-                                </td>
-                            </tr>
+                        <tbody id="books-container">
                         </tbody>
                     </table>
                 </div>
             </section>
+            <section>
+                <h2>
+                    Search for a book
+                </h2>
+                <input 
+                type="text" 
+                name="search" 
+                id="search" 
+                placeholder="Type in title, author, or genre" 
+                onkeydown="handleKeyPress()">
+                <div id="search-results"></div>
+            </section>
         </div>
-        
+        <dialog id="edit-dialog">
+            <form method="dialog">
+                <label for="title">Book Title: </label>
+                <input type="text" id="update-title" required>
+                <label for="author">Author:</label>
+                <input type="text" id="update-author" placeholder="Author" required>
+                <input type="date" name="update-publish-date" id="update-publish-date" required>
+                <label for="price">Price:</label>
+                <input type="number" name="price" id="update-price" placeholder="Price">
+                <label for="genre">Genre: </label>
+                <select name="genre" id="update-genre" required>
+                    <option>-- please select a genre --</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                    <option value="science-fiction">Science Fiction</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="science-fantasy">Science Fantasy</option>
+                    <option value="science">Science</option>
+                </select>
+            </form>
+            <div>
+                <button id="cancel-dialog">Cancel</button>
+                <button id="update-book">Update Book</button>
+            </div>
+        </dialog>        
+        <br>
+        <div id="chart-area">
+            <button id="show-chart">Show Genre Percent</button>
+            <canvas id="doughnut-chart"></canvas>
+        </div>
         <br>
         <!-- Comment section with input gathering -->
         <section id="comment-section">
@@ -154,7 +154,7 @@
                 <label for="email">Email: </label>
                 <input type="email" name="email" id="email" placeholder="example@email.com" reaquired>
                 <br>
-                <textarea name="comments" id="comments" rows="10" cols="100" required></textarea>
+                <textarea name="comments" id="text-area" rows="10" cols="100" required></textarea>
                 <br>
                 <input type="submit" value="Add Comment" id="add-comment">
             </form>
@@ -169,7 +169,6 @@
                 </p>
             </section>
         </div>
-        
     </main>
     <!-- Footer section with contact information -->
     <footer>
@@ -184,5 +183,7 @@
             <p>Copyright HA: All Rights Reserved</p>
         </div>
     </footer>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </body>
 </html>
