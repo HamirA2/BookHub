@@ -5,7 +5,6 @@ import org.example.exceptions.BookNotFoundException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -111,18 +110,51 @@ public class BookManager {
                 .toList();
     }
 
-    public boolean updateBook(Book book) {
+//    public boolean updateBook(Book book) {
+//        Book oldBook = books.stream()
+//                .filter(b1 -> b1.getId() == book.getId())
+//                .findAny()
+//                .orElseThrow(() -> new BookNotFoundException("Book was not found!"));
+//
+//        if (oldBook.equals(book)) {
+//            return false;
+//        }
+//
+//        books.add(books.indexOf(book.getId()), book);
+//
+//        //books.indexOf()
+//
+//        return true;
+//    }
+
+    public boolean updateBook(int id, Book book) {
         Book oldBook = books.stream()
-                .filter(b1 -> b1.getId() == book.getId())
+                .filter(b1 -> b1.getId() == id)
                 .findAny()
                 .orElseThrow(() -> new BookNotFoundException("Book was not found!"));
 
         if (oldBook.equals(book)) {
             return false;
         }
+        // May have to update individual values
+        books.set(books.indexOf(oldBook), book);
 
+        return true;
+    }
+
+    public boolean updateRating(int bookId, byte rating) {
+        Book book = books.stream()
+                .filter(b -> b.getId() == bookId)
+                .findFirst()
+                .orElseThrow(() -> new BookNotFoundException("Book was not found!"));
+
+        book.setRating(rating);
         books.add(book.getId() - 1, book);
 
         return true;
+    }
+
+    public boolean deleteBookById(int bookId) {
+        return books.removeIf(b -> b.getId() == bookId);
     }
 }

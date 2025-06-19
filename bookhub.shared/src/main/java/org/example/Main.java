@@ -6,6 +6,7 @@ import org.example.managers.BookManager;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -61,17 +62,25 @@ public class Main {
                 "Science",
                 (byte) 4);
 
-        Book bookSort = new Book();
-
         book1.setTitle("Clean Code");
         book1.setAuthor("Robert C. Martin");
         book1.setPublishDate(LocalDate.of(2008, 8, 1));
-        book1.setGenre("Non Fiction");
+        book1.setGenre("Non-Fiction");
         book1.setPrice(59.95f);
         book1.setRating((byte)4);
-        book1.displayBook();
 
-        //book2.displayBook();
+        List<Book> allBooks = bookManager.getAllBooks();
+
+
+        //bookManager.updateBook(2, book1);
+
+//        System.out.println(allBooks);
+//        System.out.println(bookManager.getAllBooks());
+
+//        System.out.println(bookManager.updateBook(2, book1));
+//        System.out.println(bookManager.getBooksByAuthor("Robert C. Martin"));
+//        System.out.println(bookManager.getAllBooks());
+
 
 //        System.out.println("Please enter the first number!");
 //        int num = scanner.nextInt();
@@ -85,18 +94,14 @@ public class Main {
 //
 //        }
         // Can be used in any environment minus threading not thread safe
-        StringBuilder sBuilder = new StringBuilder();
-        // Thread safe
-        StringBuffer sBuffer = new StringBuffer();
+//        StringBuilder sBuilder = new StringBuilder();
+//        // Thread safe
+//        StringBuffer sBuffer = new StringBuffer();
         //accessFile();
-//        book3.displayBook();
-//        book4.displayBook();
-//        book5.displayBook();
-//        book6.displayBook();
         //System.out.println(bookSort.compare(book1, book2));
     }
 
-    private static void accessFile() throws IOException {
-        FileReader fReader = new FileReader("bad_file.txt");
-    }
+//    private static void accessFile() throws IOException {
+//        FileReader fReader = new FileReader("bad_file.txt");
+//    }
 }
