@@ -67,26 +67,32 @@ public class BookManagerTests {
     @Test
     @DisplayName("Should add the book in the array")
     void testAddBookShouldAddABook() {
-//        Book newBook = new Book(
-//                "The Martian",
-//                "Andy Weir",
-//                LocalDate.of(2014, 10, 28),
-//                9.00f,
-//                "Science Fiction",
-//                (byte) 4
-//        );
 
-        bookManager.addBook("The Martian",
-                "Andy Weir",
+        bookManager.addBook("My Book",
+                "Me",
                 LocalDate.of(2014, 10, 28),
                 9.00f,
-                "Science Fiction",
-                (byte) 4);
+                "Fiction",
+                (byte) 1);
 
-        assertEquals("The Martian", bookManager.getBookByTitle("The Martian").getTitle());
-        assertEquals("Andy Weir", bookManager.getBookByTitle("The Martian").getAuthor());
+        assertEquals("My Book", bookManager.getBookByTitle("My Book").getTitle());
+        assertEquals("Me", bookManager.getBookByTitle("My Book").getAuthor());
+        assertEquals(LocalDate.of(2014, 10,28),
+                bookManager.getBookByTitle("The Martian").getPublishDate());
+        assertEquals(9.00f, bookManager.getBookByTitle("My Book").getPrice());
+        assertEquals("Fiction", bookManager.getBookByTitle("My Book").getGenre());
+        assertEquals((byte) 1, bookManager.getBookByTitle("My Book").getRating());
     }
 
+    @Test
+    @DisplayName("Should delete the book in the array")
+    void testDeleteBookByIdShouldDeleteBook() {
+        bookManager.deleteBookById(1);
+        assertTrue(bookManager.getBookByTitle("Adventures of Huckleberry Finn").getId()
+            != 1);
+    }
 
     // VALIDATION TEST (ASSERT THROWS) PARAM TEST AND VALUE SOURCE
+
+
 }

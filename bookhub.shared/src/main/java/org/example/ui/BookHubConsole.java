@@ -51,6 +51,9 @@ public class BookHubConsole {
                 case 8:
                     updateBook();
                     break;
+                case 9:
+                    updateBookRating();
+                    break;
                 case 10:
                     deleteById();
                     break;
@@ -86,8 +89,7 @@ public class BookHubConsole {
     private void displayBookIds() {
         System.out.println("Current Book Ids");
         bookManager.getAllBooks().forEach(book -> {
-            // REVIEW
-            System.out.printf("Id: %d, Title: %s", book.getId(), book.getTitle());
+            System.out.printf("Id: %d, Title: %s\n", book.getId(), book.getTitle());
         });
     }
 
@@ -223,11 +225,6 @@ public class BookHubConsole {
         }
     }
 
-    // COMPLETE UPDATE BY RATING
-    private void updateBookRating() {
-
-    }
-
     private void updateBook() {
         displayBookIds();
         System.out.println("Please choose an Id: ");
@@ -293,9 +290,30 @@ public class BookHubConsole {
 
     }
 
+    private void updateBookRating() {
+        scanner.nextLine();
+        displayBookIds();
+        System.out.println("\nPlease choose an id:");
+        int choice = scanner.nextInt();
+
+        System.out.println("Please choose a rating between 1-5:");
+        int userRating = scanner.nextInt();
+        scanner.nextLine();
+
+        if (userRating < 1 || userRating > 5) {
+            System.out.println("No valid rating set!");
+            return;
+        }
+
+        boolean isUpdated = bookManager.updateRating(choice, (byte)userRating);
+
+        System.out.printf("Book updated status: %b\n", isUpdated);
+        bookManager.getBookById(choice).displayBook();
+    }
+
     private void deleteById() {
         displayBookIds();
-        System.out.println("Please choose an Id: ");
+        System.out.println("Please choose an Id:");
 
         int choice = scanner.nextInt();
         scanner.nextLine();

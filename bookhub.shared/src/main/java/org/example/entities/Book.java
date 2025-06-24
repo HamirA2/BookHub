@@ -4,7 +4,9 @@ import org.example.exceptions.BookInputException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 public class Book implements Comparable<Book>, Comparator<Book> {
@@ -24,6 +26,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     private byte rating;
     private final LocalDateTime dateAdded;
 
+    private List<Review> reviews;
+
     private static int idPointer = 1;
 
     // Constructor
@@ -32,6 +36,7 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     public Book() {
         this.id = idPointer;
         this.dateAdded = LocalDateTime.now();
+        this.reviews = new ArrayList<Review>();
         idPointer++;
     }
 
@@ -63,12 +68,14 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         this.genre = genre;
         this.rating = rating;
         dateAdded = LocalDateTime.now();
+        this.reviews = new ArrayList<Review>();
         idPointer++;
     }
 
     public Book(int id, LocalDateTime dateAdded) {
         this.id = id;
         this.dateAdded = dateAdded;
+        this.reviews = new ArrayList<Review>();
     }
 
     // Getters/Setters
@@ -155,6 +162,14 @@ public class Book implements Comparable<Book>, Comparator<Book> {
 
     public void setRating(byte rating) {
             this.rating = rating;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public void displayBook() {
