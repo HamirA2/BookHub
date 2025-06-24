@@ -68,6 +68,13 @@ public class BookManager {
         return books;
     }
 
+    public Book getBookById(int bookId) {
+        return books.stream()
+                .filter(book -> book.getId() == bookId)
+                .findFirst()
+                .orElseThrow(() -> new BookNotFoundException("Book not found!"));
+    }
+
     public Book getBookByTitle(String title) {
         for (int i = 0; i < books.size(); i++) {
             if (books.get(i).getTitle().equalsIgnoreCase(title)) {
@@ -110,35 +117,15 @@ public class BookManager {
                 .toList();
     }
 
-//    public boolean updateBook(Book book) {
-//        Book oldBook = books.stream()
-//                .filter(b1 -> b1.getId() == book.getId())
-//                .findAny()
-//                .orElseThrow(() -> new BookNotFoundException("Book was not found!"));
-//
-//        if (oldBook.equals(book)) {
-//            return false;
-//        }
-//
-//        books.add(books.indexOf(book.getId()), book);
-//
-//        //books.indexOf()
-//
-//        return true;
-//    }
-
-    public boolean updateBook(int id, Book book) {
+    public boolean updateBook(Book book) {
         Book oldBook = books.stream()
-                .filter(b1 -> b1.getId() == id)
+                .filter(b1 -> b1.getId() == book.getId())
                 .findAny()
                 .orElseThrow(() -> new BookNotFoundException("Book was not found!"));
-
-        if (oldBook.equals(book)) {
+        if(oldBook.equals(book)) {
             return false;
         }
-        // May have to update individual values
-        books.set(books.indexOf(oldBook), book);
-
+        books.replaceAll(b -> b.getId() == book.getId() ? book : b);
         return true;
     }
 
@@ -147,10 +134,7 @@ public class BookManager {
                 .filter(b -> b.getId() == bookId)
                 .findFirst()
                 .orElseThrow(() -> new BookNotFoundException("Book was not found!"));
-
         book.setRating(rating);
-        books.add(book.getId() - 1, book);
-
         return true;
     }
 

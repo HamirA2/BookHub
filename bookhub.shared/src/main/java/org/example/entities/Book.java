@@ -6,8 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Objects;
-/*
-* Create 5 more books in Main and improve compare method.*/
+
 public class Book implements Comparable<Book>, Comparator<Book> {
     // Encapsulation
     // Control the flow of Data coming in and out of our classes
@@ -65,6 +64,11 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         this.rating = rating;
         dateAdded = LocalDateTime.now();
         idPointer++;
+    }
+
+    public Book(int id, LocalDateTime dateAdded) {
+        this.id = id;
+        this.dateAdded = dateAdded;
     }
 
     // Getters/Setters
@@ -163,6 +167,10 @@ public class Book implements Comparable<Book>, Comparator<Book> {
                 "\nGenre: " + getGenre() +
                 "\nCurrent Rating: " + getRating() + " Stars"
                 );
+    }
+
+    public LocalDateTime getDateAdded() {
+        return dateAdded;
     }
 
     @Override

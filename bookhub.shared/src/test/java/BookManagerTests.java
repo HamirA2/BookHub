@@ -1,0 +1,92 @@
+import org.example.entities.Book;
+import org.example.managers.BookManager;
+import org.junit.jupiter.api.*;
+
+import java.lang.reflect.Field;
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class BookManagerTests {
+    private BookManager bookManager;
+
+    @BeforeEach
+    private void setUp() {
+        bookManager = new BookManager();
+
+        bookManager.addBook("Adventures of Huckleberry Finn",
+                "Mark Twain",
+                LocalDate.of(1884, 12, 10),
+                15.00f,
+                "Fiction",
+                (byte) 5);
+        bookManager.addBook("The Martian",
+                "Andy Weir",
+                LocalDate.of(2014, 10, 28),
+                9.00f,
+                "Science Fiction",
+                (byte) 4);
+        bookManager.addBook("Twilight",
+                "Stephenie Meyer",
+                LocalDate.of(2005, 10, 5),
+                18.90f,
+                "Fantasy",
+                (byte) 3);
+    }
+
+    @AfterEach
+    private void cleanUp() {
+        bookManager = null;
+    }
+
+    @Test
+    @DisplayName("Should give accurate size of array when tested!")
+    void testGetAllBooksSuccessTest() {
+        assertEquals(3, bookManager.getAllBooks().size());
+    }
+
+    @Test
+    @DisplayName("Should update the book in the Array!")
+    void testUpdateBookShouldUpdateTheBook() {
+        Book oldBook = bookManager.getBookById(3);
+
+        Book expectedBook = new Book(oldBook.getId(), oldBook.getDateAdded());
+        expectedBook.setTitle("Dirty Code");
+        expectedBook.setAuthor("Mohammed");
+        expectedBook.setGenre("Non-Fiction");
+        expectedBook.setPublishDate(LocalDate.of(2025, 6, 23));
+        expectedBook.setRating((byte)0);
+
+        assertTrue(bookManager.updateBook(expectedBook));
+        Book updateBook = bookManager.getBookById(3);
+        assertEquals(expectedBook.getTitle(), updateBook.getTitle());
+    }
+
+    // SUCCESS TEST ADD BOOK/DELETE
+    @Test
+    @DisplayName("Should add the book in the array")
+    void testAddBookShouldAddABook() {
+//        Book newBook = new Book(
+//                "The Martian",
+//                "Andy Weir",
+//                LocalDate.of(2014, 10, 28),
+//                9.00f,
+//                "Science Fiction",
+//                (byte) 4
+//        );
+
+        bookManager.addBook("The Martian",
+                "Andy Weir",
+                LocalDate.of(2014, 10, 28),
+                9.00f,
+                "Science Fiction",
+                (byte) 4);
+
+        assertEquals("The Martian", bookManager.getBookByTitle("The Martian").getTitle());
+        assertEquals("Andy Weir", bookManager.getBookByTitle("The Martian").getAuthor());
+    }
+
+
+    // VALIDATION TEST (ASSERT THROWS) PARAM TEST AND VALUE SOURCE
+}
