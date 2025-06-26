@@ -1,6 +1,8 @@
 import org.example.entities.Book;
 import org.example.managers.BookManager;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -93,6 +95,10 @@ public class BookManagerTests {
     }
 
     // VALIDATION TEST (ASSERT THROWS) PARAM TEST AND VALUE SOURCE
-
+//    @ParameterizedTest
+//    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+//    void getBookShouldReturnSameValue(int bookId) {
+//        assertEquals(bookId, bookManager.getBookById(bookId).getId());
+//    }
 
 }

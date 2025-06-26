@@ -2,19 +2,28 @@ package org.example.managers;
 
 import org.example.entities.Book;
 import org.example.exceptions.BookNotFoundException;
+import org.example.utils.BookFileHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class BookManager {
     private List<Book> books;
+    private boolean currentUpdateTracker = false;
+    private ExecutorService executorService;
 
-    public BookManager() {
-        this.books = new ArrayList<Book>();
+    {
+        executorService = Executors.newSingleThreadExecutor();
+        books = BookFileHandler.loadBooks();
+        executorService.submit(autoSaveRunnable());
     }
+
+    public BookManager() {}
 
     public void addBook(String title,
                         String author,
@@ -31,6 +40,7 @@ public class BookManager {
         book.setRating(rating);
         book.displayBook();
         books.add(book);
+        currentUpdateTracker = true;
     }
 
     public void addBook(String title,
@@ -46,6 +56,7 @@ public class BookManager {
         book.setRating((byte)0);
         book.displayBook();
         books.add(book);
+        currentUpdateTracker = true;
     }
 
     public void addBook(String title,
@@ -62,6 +73,7 @@ public class BookManager {
         book.setRating(rating);
         book.displayBook();
         books.add(book);
+        currentUpdateTracker = true;
     }
 
     public List<Book> getAllBooks() {
@@ -126,6 +138,7 @@ public class BookManager {
             return false;
         }
         books.replaceAll(b -> b.getId() == book.getId() ? book : b);
+        currentUpdateTracker = true;
         return true;
     }
 
@@ -135,10 +148,35 @@ public class BookManager {
                 .findFirst()
                 .orElseThrow(() -> new BookNotFoundException("Book was not found!"));
         book.setRating(rating);
+        currentUpdateTracker = true;
         return true;
     }
 
     public boolean deleteBookById(int bookId) {
-        return books.removeIf(b -> b.getId() == bookId);
+        try {
+            return books.removeIf(b -> b.getId() == bookId);
+        } finally {
+            currentUpdateTracker = true;
+        }
+
+    }
+
+    public Runnable autoSaveRunnable() {
+        Runnable runnable = () -> {
+            while (true) {
+                if (currentUpdateTracker) {
+                    BookFileHandler.saveBooks(books);
+                    currentUpdateTracker = false;
+                }
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    System.err.println("Threading Error has occurred: " + e.getMessage());
+                }
+
+            }
+        };
+
+        return runnable;
     }
 }

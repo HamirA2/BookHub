@@ -17,14 +17,14 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     // number primitive data types:
     // byte(8 bits)(-128 - 127), short(16 bits) (-32,768 - 32,767), int(32 bits), long(64 bits)
     // decimal primitives: double(), float
-    private final int id;
+    private int id;
     private String title;
     private String author;
     private LocalDate publishDate;
     private float price;
     private String genre;
     private byte rating;
-    private final LocalDateTime dateAdded;
+    private LocalDateTime dateAdded;
 
     private List<Review> reviews;
 
@@ -91,12 +91,12 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         return id;
     }
 
-//    public void setId(int id) {
-//        if (id > 0) {
-//            this.id = id;
-//        }
-//
-//    }
+    public void setId(int id) {
+        if (id > 0) {
+            this.id = id;
+        }
+
+    }
 
     public String getTitle() {
         return title;
@@ -186,6 +186,10 @@ public class Book implements Comparable<Book>, Comparator<Book> {
 
     public LocalDateTime getDateAdded() {
         return dateAdded;
+    }
+
+    public void setDateAdded(LocalDateTime dateAdded) {
+        this.dateAdded = dateAdded;
     }
 
     @Override

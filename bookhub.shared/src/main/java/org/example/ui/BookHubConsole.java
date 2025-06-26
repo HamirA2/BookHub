@@ -59,6 +59,7 @@ public class BookHubConsole {
                     break;
                 case 11:
                     System.out.println("Goodbye!");
+                    System.exit(0);
                     return;
                 default:
                     System.out.println("Invalid Choice!");

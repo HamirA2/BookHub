@@ -37,14 +37,25 @@ public class ReviewManager {
         boolean results = false;
         Review review = getBookReviewById(book, reviewId);
 
-        if (!review.getComment().equals(comment) || !comment.isBlank()) {
-            review.setComment(comment);
-            results = true;
+//        if (!review.getComment().equals(comment) || !comment.isBlank()) {
+//            review.setComment(comment);
+//            results = true;
+//        }
+//        if (review.getRating() != rating && !(rating < 0 || rating > 5)) {
+//            review.setRating(rating);
+//            results = true;
+//        }
+
+        if (review.getComment().equals(comment) || comment.isBlank()) {
+            exceptionThrower("Comment is unchanged or is blank!");
         }
-        if (review.getRating() != rating && !(rating < 0 || rating > 5)) {
-            review.setRating(rating);
-            results = true;
+        else if (review.getRating() == rating || (rating < 0 || rating > 5)) {
+            exceptionThrower("Rating is unchanged or not between 1-5!");
         }
+
+        review.setComment(comment);
+        review.setRating(rating);
+        results = true;
 
         return results;
     }
@@ -53,7 +64,6 @@ public class ReviewManager {
         return book.getReviews().removeIf(b -> b.getReviewId() == reviewId);
     }
 
-    // FINISH
     private static void exceptionThrower(String message) {
         throw new ReviewInputException(message);
     }
