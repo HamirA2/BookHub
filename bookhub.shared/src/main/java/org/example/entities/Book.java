@@ -28,16 +28,12 @@ public class Book implements Comparable<Book>, Comparator<Book> {
 
     private List<Review> reviews;
 
-    private static int idPointer = 1;
-
     // Constructor
     // special method that initializes the instance object from the class object
     // it's called in conjunction with the "new" keyword.
     public Book() {
-        this.id = idPointer;
         this.dateAdded = LocalDateTime.now();
         this.reviews = new ArrayList<Review>();
-        idPointer++;
     }
 
     public Book(
@@ -60,7 +56,6 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             throw new BookInputException("Genre is required to be filled out");
         }
 
-        this.id = idPointer;
         this.title = title;
         this.author = author;
         this.publishDate = publishDate;
@@ -69,7 +64,6 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         this.rating = rating;
         dateAdded = LocalDateTime.now();
         this.reviews = new ArrayList<Review>();
-        idPointer++;
     }
 
     public Book(int id, LocalDateTime dateAdded) {
@@ -237,23 +231,6 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     // Comparator(multiple comparison)
     @Override
     public int compare(Book book1, Book book2) {
-//        if (book1.title.equalsIgnoreCase(book2.title) &&
-//            book1.author.equalsIgnoreCase(book2.author) &&
-//            book1.publishDate.equals(book2.publishDate)) {
-//            return 1;
-//        }
-//        else if (!book1.title.equalsIgnoreCase(book2.title) &&
-//                 !book1.author.equalsIgnoreCase(book2.author) &&
-//                 !book1.publishDate.equals(book2.publishDate)) {
-//            return -1;
-//        }
-//        return 0;
-
-//        return book1.title.compareToIgnoreCase(book2.title)
-//                - book1.author.compareToIgnoreCase(book2.author)
-//                - book1.publishDate.compareTo(book2.publishDate);
         return book1.publishDate.compareTo(book2.publishDate);
-
-        //return book1.title
     }
 }

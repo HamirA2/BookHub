@@ -3,11 +3,28 @@ package org.example.managers;
 import org.example.entities.Book;
 import org.example.entities.Review;
 import org.example.exceptions.ReviewInputException;
+import org.example.repository.ReviewRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewManager {
-    public static List<Review> getAllBookReviews(Book book) {
+    private static boolean updateTracker = false;
+
+    public ReviewManager(ReviewRepository reviewRepository) {
+
+    }
+
+//    public static List<Review> getAllBookReviews(List<Book> books) {
+//        List<Book> bookWithReviews = books.stream()
+//                .filter(book -> !book.getReviews().isEmpty()).toList();
+//
+//        List<Review> reviews = new ArrayList<Review>();
+//        reviews.add(bookWithReviews.stream().forEach(book -> book.getReviews()));
+//
+//    }
+
+    public static List<Review> getAllBookReviewsFromBook(Book book) {
         return book.getReviews();
     }
 
@@ -21,6 +38,18 @@ public class ReviewManager {
         return null;
     }
 
+    public static List<Review> getBookReviewsByUsername(Book book, String username) {
+        List<Review> reviews = new ArrayList<Review>();
+
+        for (Review review : book.getReviews()) {
+            if (review.getUsername().equals(username)) {
+                reviews.add(review);
+            }
+        }
+
+        return reviews;
+    }
+
     public static void addReview(Book book,
                             String username,
                             String comment,
@@ -30,21 +59,12 @@ public class ReviewManager {
         Review review = new Review(username, comment, rating);
         book.getReviews().add(review);
         System.out.println("Review successfully added!");
+        updateTracker = true;
     }
 
-    // TODO: OPTIMIZE THIS (maybe top add too) USE METHOD TO THROW EXCEPTIONS
     public static boolean updateReview(Book book, int reviewId, String comment, byte rating) {
         boolean results = false;
         Review review = getBookReviewById(book, reviewId);
-
-//        if (!review.getComment().equals(comment) || !comment.isBlank()) {
-//            review.setComment(comment);
-//            results = true;
-//        }
-//        if (review.getRating() != rating && !(rating < 0 || rating > 5)) {
-//            review.setRating(rating);
-//            results = true;
-//        }
 
         if (review.getComment().equals(comment) || comment.isBlank()) {
             exceptionThrower("Comment is unchanged or is blank!");
@@ -56,7 +76,7 @@ public class ReviewManager {
         review.setComment(comment);
         review.setRating(rating);
         results = true;
-
+        updateTracker = true;
         return results;
     }
 
@@ -67,4 +87,14 @@ public class ReviewManager {
     private static void exceptionThrower(String message) {
         throw new ReviewInputException(message);
     }
+
+//    public Runnable autoSaveRunnable() {
+//        Runnable runnable = () -> {
+//            while (true) {
+//                if (updateTracker) {
+//                    get
+//                }
+//            }
+//        };
+//    }
 }

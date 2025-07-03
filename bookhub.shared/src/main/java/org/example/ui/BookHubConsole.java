@@ -2,20 +2,23 @@ package org.example.ui;
 
 import org.example.entities.Book;
 import org.example.managers.BookManager;
+import org.example.repository.DatabaseConnection;
+import org.example.managers.ReviewManager;
+import org.example.entities.Review;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class BookHubConsole {
     private BookManager bookManager;
     private Scanner scanner;
 
-    public BookHubConsole() {
-        bookManager = new BookManager();
-        scanner = new Scanner(System.in);
+    public BookHubConsole(BookManager bookManager, Scanner scanner) {
+        this.bookManager = bookManager;
+        this.scanner = scanner;
     }
 
     public void start() {
@@ -25,7 +28,6 @@ public class BookHubConsole {
             displayMenu();
             int choice = scanner.nextInt();
 
-            // DO THE REST OF THE MENU!!!!
             switch (choice) {
                 case 1:
                     addBook();
@@ -58,9 +60,22 @@ public class BookHubConsole {
                     deleteById();
                     break;
                 case 11:
+                    getAllBookReviewsFromBookId();
+                    break;
+                case 17:
                     System.out.println("Goodbye!");
+                    bookManager.shutDownAutoSave();
+                    System.out.println("Auto Save Shutdown!");
+                    scanner.close();
+                    System.out.println("Scanner Closed!");
+                    try {
+                        System.out.println("Closing Database Connection!");
+                        DatabaseConnection.getInstance().getConnection().close();
+                        System.out.println("Connection Closed");
+                    } catch (SQLException e) {
+                        System.err.println("Error occurred while closing the Connection!");
+                    }
                     System.exit(0);
-                    return;
                 default:
                     System.out.println("Invalid Choice!");
             }
@@ -69,21 +84,27 @@ public class BookHubConsole {
 
     private void displayMenu() {
         System.out.println("""
-                +-------------------------------+
-                |           Main Menu           |
-                +-------------------------------+
-                |1. Add a Book                  |
-                |2. Get all Books               |
-                |3. Get Book by Title           |
-                |4. Get Books by Author         |
-                |5. Get Books by Genre          |
-                |6. Get Book Genre Stats        |
-                |7. Get Sorted Book List        |
-                |8. Update a Book               |
-                |9. Update Rating of Book       |
-                |10. Delete a Book              |
-                |11. Exit                       |
-                +-------------------------------+
+                +--------------------------------+
+                |           Main Menu            |
+                +--------------------------------+
+                |1. Add a Book                   |
+                |2. Get all Books                |
+                |3. Get Book by Title            |
+                |4. Get Books by Author          |
+                |5. Get Books by Genre           |
+                |6. Get Book Genre Stats         |
+                |7. Get Sorted Book List         |
+                |8. Update a Book                |
+                |9. Update Rating of Book        |
+                |10. Delete a Book               |
+                |11. Get All Book Reviews        |
+                |12. Get A Book Review by Id     |
+                |13. Get Book Reviews by User    |
+                |14. Add A Book Review           |
+                |15. Update A Book Review        |
+                |16. Delete A Book Review        |
+                |17. Exit                        |
+                +--------------------------------+
                 """); // "" Single line, // """ for multi line
     }
 
@@ -324,5 +345,22 @@ public class BookHubConsole {
         } else {
             System.err.println("Invalid Book Choice!");
         }
+    }
+
+    private void getAllBookReviewsFromBookId() {
+        displayBookIds();
+        System.out.println("Please choose an Id:");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (bookManager.getAllBooks().isEmpty()) {
+            System.out.println("The library has no books for reviews");
+            return;
+        }
+
+        Book book = bookManager.getBookById(choice);
+
+        ReviewManager.getAllBookReviewsFromBook(book).forEach(Review::displayReview);
     }
 }

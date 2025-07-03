@@ -2,8 +2,10 @@ package org.example.managers;
 
 import org.example.entities.Book;
 import org.example.exceptions.BookNotFoundException;
+import org.example.repository.BookRepository;
 import org.example.utils.BookFileHandler;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +18,24 @@ public class BookManager {
     private List<Book> books;
     private boolean currentUpdateTracker = false;
     private ExecutorService executorService;
+    private BookRepository bookRepository;
 
-    {
-        executorService = Executors.newSingleThreadExecutor();
-        books = BookFileHandler.loadBooks();
-        executorService.submit(autoSaveRunnable());
+//    {
+//        executorService = Executors.newSingleThreadExecutor();
+//        books = BookFileHandler.loadBooks();
+//        executorService.submit(autoSaveRunnable());
+//    }
+
+    public BookManager(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+        try {
+            this.books = this.bookRepository.findAll();
+        } catch (SQLException e) {
+            System.err.println("Error occurred when loading the data into the app!");
+        }
+        this.executorService = Executors.newSingleThreadExecutor();
+        this.executorService.submit(autoSaveRunnable());
     }
-
-    public BookManager() {}
 
     public void addBook(String title,
                         String author,
@@ -81,6 +93,11 @@ public class BookManager {
     }
 
     public Book getBookById(int bookId) {
+        try {
+            bookRepository.findBook(bookId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return books.stream()
                 .filter(book -> book.getId() == bookId)
                 .findFirst()
@@ -154,18 +171,33 @@ public class BookManager {
 
     public boolean deleteBookById(int bookId) {
         try {
+            bookRepository.deleteById(bookId);
             return books.removeIf(b -> b.getId() == bookId);
-        } finally {
-            currentUpdateTracker = true;
+        } catch (SQLException e) {
+            System.err.println("Error Occurred while deleting");
+            return false;
         }
 
     }
 
     public Runnable autoSaveRunnable() {
+        // run method with lambda expression
         Runnable runnable = () -> {
             while (true) {
                 if (currentUpdateTracker) {
-                    BookFileHandler.saveBooks(books);
+//                    BookFileHandler.saveBooks(books);
+                    books.forEach(book -> {
+                        if (book.getId() <= 0) {
+                            bookRepository.save(book);
+                        } else if (!book.getTitle().isBlank()) {
+                            try {
+                                bookRepository.updateBook(book);
+                            } catch (SQLException e) {
+                                System.err.println("Error occurred when updating book with id: " +
+                                        book.getId() + " Error Message: " + e.getMessage());
+                            }
+                        }
+                    });
                     currentUpdateTracker = false;
                 }
                 try {
@@ -178,5 +210,10 @@ public class BookManager {
         };
 
         return runnable;
+    }
+
+    public void shutDownAutoSave() {
+        executorService.shutdownNow();
+        System.out.println("Auto Save Thread shutting down.");
     }
 }

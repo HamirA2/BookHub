@@ -41,17 +41,6 @@ public class BookFileHandler {
         book.setGenre(bookStrings[5]);
         book.setRating(Byte.parseByte(bookStrings[6]));
         book.setDateAdded(LocalDateTime.parse(bookStrings[7]));
-//		int pointer = 0;
-//		for(Field field : book.getClass().getDeclaredFields()) {
-//			if(pointer > 7) break;
-//			try {
-//				field.setAccessible(true);
-//				field.set(book, bookStrings[pointer++]);
-//				field.setAccessible(false);
-//			} catch (IllegalArgumentException | IllegalAccessException e) {
-//				System.err.println("Error has occurred during parsing: " + e.getMessage());
-//			}
-//		}
 
         return book;
     }
