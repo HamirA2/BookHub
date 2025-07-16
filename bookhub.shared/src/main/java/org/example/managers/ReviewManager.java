@@ -4,11 +4,16 @@ import org.example.entities.Book;
 import org.example.entities.Review;
 import org.example.exceptions.ReviewInputException;
 import org.example.repository.ReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewManager {
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
     private static boolean updateTracker = false;
 
     public ReviewManager(ReviewRepository reviewRepository) {

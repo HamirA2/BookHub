@@ -3,11 +3,13 @@ package org.example.repository;
 import org.example.entities.Book;
 import org.example.entities.Review;
 import org.example.managers.ReviewManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class ReviewRepository {
     private Connection connection;
 

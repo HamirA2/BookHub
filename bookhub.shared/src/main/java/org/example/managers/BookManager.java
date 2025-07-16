@@ -93,11 +93,6 @@ public class BookManager {
     }
 
     public Book getBookById(int bookId) {
-        try {
-            bookRepository.findBook(bookId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
         return books.stream()
                 .filter(book -> book.getId() == bookId)
                 .findFirst()
@@ -105,11 +100,12 @@ public class BookManager {
     }
 
     public Book getBookByTitle(String title) {
-        for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).getTitle().equalsIgnoreCase(title)) {
-                return books.get(i);
-            }
+        try {
+            return bookRepository.findBook(title);
+        } catch (SQLException e) {
+            System.err.println("Error occurred while finding the book: " + e.getMessage());
         }
+
         return null;
     }
 

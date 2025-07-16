@@ -79,15 +79,15 @@ public class BookRepository {
         }
     }
 
-    public Book findBook(int bookId) throws SQLException {
+    public Book findBook(String bookTitle) throws SQLException {
         String sqlString = "SELECT id, title, author, publish_date, price, genre, rating, date_added" +
-                " FROM books WHERE id=?";
+                " FROM books WHERE title=?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlString)) {
-            // Process the id of the WHERE
-            preparedStatement.setInt(1, bookId);
+            // Process the title of the WHERE
+            preparedStatement.setString(1, bookTitle);
 
-            try (ResultSet bookSet = preparedStatement.executeQuery(sqlString)) {
+            try (ResultSet bookSet = preparedStatement.executeQuery()) {
                 if (bookSet.next()) {
                     Book currentBook = new Book();
                     currentBook.setId(bookSet.getInt(1));
