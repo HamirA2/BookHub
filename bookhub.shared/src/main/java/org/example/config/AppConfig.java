@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan("org.example.bookhub.shared")
+@ComponentScan("org.example")
 public class AppConfig {
 
     @Bean

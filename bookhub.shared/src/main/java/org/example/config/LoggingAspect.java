@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class LoggingAspect {
     private static final Logger LOGGER = Logger.getLogger(LoggingAspect.class.getName());
 
-    @Before("execution(org.example.managers.*.*(..))")
+    @Before("execution(* org.example.managers.*.*(..))")
     public void logBefore(JoinPoint joinPoint) {
         String messageString = String.format("Calling Method: {} with args: {}",
                 joinPoint.getSignature().getName(),
