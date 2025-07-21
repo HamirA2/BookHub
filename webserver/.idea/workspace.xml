@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ef28b3f6-e227-4f7e-a7c2-863653793b46" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/controllers/StaticController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/dto/AdminBookDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/dto/BookDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/dto/PostNewBook.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/dto/PostNewBookAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/dto/PostNewReview.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/dto/ReviewDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/entities/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/entities/Review.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/exceptions/BookNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/exceptions/ReviewNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/repositories/BookRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/repositories/GenreStatsProjection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/repositories/ReviewRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/service/AdminBookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/service/AdminBookServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/service/BookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/service/ReviewService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/service/ReviewServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/service/UserBookServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/utils/BookMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/webserver/utils/BookServiceFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LandingPage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../LandingPage/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/config/LoggingAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/config/LoggingAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/managers/BookManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/managers/BookManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/repository/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/repository/ReviewRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/ui/BookHubConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/ui/BookHubConsole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/utils/BookFileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bookhub.shared/src/main/java/org/example/utils/BookFileHandler.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="package-info" />
+        <option value="Exception" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="300ePFO5Y06qeLljyul2agGuyut" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.WebserverApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.example.webserver.repositories" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="WebserverApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <envs>
+        <env name="DATABASE_URL" value="jdbc:mysql://localhost:3306/bookhubdb" />
+        <env name="DATABASE_USER" value="root" />
+        <env name="DATABASE_PASSWORD" value="Homecourt01$" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="org.example.webserver.WebserverApplication" />
+      <module name="webserver" />
+      <option name="VM_PARAMETERS" value="-Dspring.profiles.active=dev" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.webserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ef28b3f6-e227-4f7e-a7c2-863653793b46" name="Changes" comment="" />
+      <created>1752768891636</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1752768891636</updated>
+    </task>
+    <servers />
+  </component>
+</project>
